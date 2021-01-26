@@ -35,9 +35,6 @@ def create_app(test_config=None):
 
            total_actors = Actors.query.all()
 
-           if len(total_actors) == 0:
-              abort(404)
-
            actors = [actor.format() for actor in total_actors]
 
            return jsonify({
@@ -57,9 +54,6 @@ def create_app(test_config=None):
         try:
 
             total_movies = Movies.query.all()
-
-            if len(total_movies) == 0:
-                abort(404)
 
             movies = [movie.format() for movie in total_movies]
 
