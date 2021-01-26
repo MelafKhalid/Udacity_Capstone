@@ -60,10 +60,11 @@ class Actors(db.Model):
     gender = db.Column(db.String)
     movie_id = db.Column(db.Integer, db.ForeignKey('Movies.id'), nullable=True)
 
-    def __init__(self, name, age, gender):
+    def __init__(self, name, age, gender, movie_id):
         self.name = name
         self.age = age
         self.gender = gender
+        self.movie_id = movie_id
         
     def format(self):
         return {
