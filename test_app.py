@@ -9,15 +9,15 @@ from models import setup_db, Actors, Movies
 
 Executive_jwt = {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InFvdnZLQ1h6ekMya21NMDhycVFKMSJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtbWVsYWYudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMTExNmUwM2IyZDM0MDA2OWQwYWVlOSIsImF1ZCI6IkNhcHN0b25lIiwiaWF0IjoxNjExNzMyODYxLCJleHAiOjE2MTE4MTkyNjEsImF6cCI6InkxS3pMbm9rQUw3b2RZRzNKc0ZRNlVlRnJSNUE4UnNUIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.rVpZHC6FxMkEE2to-9ZucEJWpjmDzTkA4o_onoOOgmCjrXFTd8EAvOU8zjWm2X3bU0HLHVA-klr9GMG9D4Flspr_XOqg2ydgaZH7nvKsUGcnUq_NHEZkHI9ep0YCNVOfhQ9KnUHErRygPEWTa2fCXvn3bzwNj4hBnGBZ_mVCbo1x9GdtRatwOEDJJDOTQwPkmCKNNllgcvtHAGA84E67c7P-6PXoCD2XEpPeltWjW9s2A0d4RmA92YZILdS2rmPcx0tBgk_w81UdkrOABu6eqiCP7tAxxoIDbhfXsYaHYcFECXxb4RWvTtZm_iB5hNe-WxZ5hyAxgJKxabs-qTL3gA'}
+    'Authorization': os.environ['Executive_jwt']
 
 Director_jwt = {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InFvdnZLQ1h6ekMya21NMDhycVFKMSJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtbWVsYWYudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMTExNDliMzQwMjg1MDA3MTYwODEzOCIsImF1ZCI6IkNhcHN0b25lIiwiaWF0IjoxNjExNzMyNTcxLCJleHAiOjE2MTE4MTg5NzEsImF6cCI6InkxS3pMbm9rQUw3b2RZRzNKc0ZRNlVlRnJSNUE4UnNUIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyJdfQ.p1hFhBP5B-XErwVtqUMSynPeHUtEyqrBC_tTcugK5xkmZQNNQGMUtP23I59DljmRZ6lHUBzzlBsTXu05Zs8VpfORLNIWaT2wX-ILH-yiKCQ2YYCChM2QRZiw6pfyKkF_PnryE1_PLc34hIKjzBuIladRFnGVE0oODW05fsU73Qvap68I-VfedURGlZMRMijc_0V14vD-EykQb8W1TcEz0E6ziuHz-KfdRLR-iYzB8Z0a8L_X4vwuTwSwikhvAx7mO8FFsLkqPXn_qUo2uyx6nlrcT1gO92t8Yc5CLem5oPzbYFgsHCgD1bAc0qPcS4rak197M9DRvco6868u0PzeoA'}
+    'Authorization': os.environ['Director_jwt']
 
 Assistant_jwt = {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InFvdnZLQ1h6ekMya21NMDhycVFKMSJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtbWVsYWYudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMTExMTM1NDQxZmQ2MDA3MDgyM2Q2MyIsImF1ZCI6IkNhcHN0b25lIiwiaWF0IjoxNjExNzMxODUwLCJleHAiOjE2MTE4MTgyNTAsImF6cCI6InkxS3pMbm9rQUw3b2RZRzNKc0ZRNlVlRnJSNUE4UnNUIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyJdfQ.uq8LstnH8fqJ28Cj0rDnQ_NdmHtBy0j-T0c64PQlrvgx_JUrrjtQvsFi4TNmqSRTTtp4gyQuIOC5aY6jsHVAw_Hr8v2R4XurxxnVoJWvbwN2jrxu-ua36cCR9Y8Yc7r1YY06L4TKpH0HddRJiqFsRKPSUwCOmChMldrOkpuOG0uhHloD9Yj-6UznTM-7PajACIsSF2c1nX_BN7RyjyTTH3b23LvraeKB1Ixs112n7pq-dJ0mgI2CZQxnK_c7dQBwHYsmAvE1nZ4LN_Rrct4_f4YrigaAhNXkVGTHbaNN84rexGzHBWJZ2IXiVEYI-iVXj-qexDXdWMnOrlni76_1ZA'}
+    'Authorization': os.environ['Assistant_jwt']
 
 class CapstoneTestCase(unittest.TestCase):
     """This class represents the Capstone test case"""
@@ -86,7 +86,7 @@ class CapstoneTestCase(unittest.TestCase):
 
 # Actors
 
-def test_failed_post_actors(self):
+    def test_failed_post_actors(self):
 
         res = self.client().post('/actors', json={
                                         'name': 'Melaf',

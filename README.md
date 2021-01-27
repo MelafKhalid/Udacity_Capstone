@@ -1,6 +1,20 @@
-# Coffee Shop Full Stack Nanodegree
+# Casting Agency Full Stack Nanodegree
 
 The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies.
+
+## Motivation
+
+This project contains all knowledge that I learned during Full Stack Development Nanodegree
+
+- I am in the Information Technology industry where all the tools will help me do my job efficiently
+
+- I developed this project to make use of all the knowledge I acquired in this nanodegree and hence gain confidence in all these skills.
+
+- I wanted to contribute to developing the open-source community by building applications
+
+- 
+
+Completing this app gave me the essential skills and enthusiasm to continue learning and development in the field of software programming
 
 ## Getting Started
 
@@ -15,7 +29,7 @@ Follow instructions to install the latest version of python for your platform in
 ### Install the dependencies
 
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Export Environment Variables
@@ -291,3 +305,7 @@ dropdb capstone
 createdb capstone
 python test_app.py
 ```
+
+## Postman
+
+Postman to test all API Provided
