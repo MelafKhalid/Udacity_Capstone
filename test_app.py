@@ -10,14 +10,18 @@ from models import setup_db, Actors, Movies
 Executive_jwt = {
     'Content-Type': 'application/json',
     'Authorization': os.environ['Executive_jwt']
+}
 
 Director_jwt = {
     'Content-Type': 'application/json',
     'Authorization': os.environ['Director_jwt']
+}
 
 Assistant_jwt = {
     'Content-Type': 'application/json',
     'Authorization': os.environ['Assistant_jwt']
+}
+
 
 class CapstoneTestCase(unittest.TestCase):
     """This class represents the Capstone test case"""
@@ -27,7 +31,8 @@ class CapstoneTestCase(unittest.TestCase):
         self.app = create_app()
         self.client = self.app.test_client
         self.database_name = "capstone_test"
-        self.database_path = "postgres://{}/{}".format('localhost:5432', self.database_name)
+        self.database_path = "postgres://{}/{}".format(
+            'localhost:5432', self.database_name)
         setup_db(self.app, self.database_path)
 
         # binds the app to the current context
@@ -43,7 +48,7 @@ class CapstoneTestCase(unittest.TestCase):
 
 # Test for each test for successful operation and for expected errors.
 
-# Get test 
+# Get test
 
 # Actors
 
@@ -54,7 +59,6 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
-        
     def test_get_actors(self):
         res = self.client().get('/actors', headers=Assistant_jwt)
         data = json.loads(res.data)
@@ -80,26 +84,23 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertIsNotNone(data['movies'])
 
-
-# Post set 
-
+# Post set
 
 # Actors
 
     def test_failed_post_actors(self):
 
         res = self.client().post('/actors', json={
-                                        'name': 'Melaf',
-                                        'age': '22',
-                                        'gender': 'female',
-                                        'movie_id': 1
-                                    })
+            'name': 'Melaf',
+            'age': '22',
+            'gender': 'female',
+            'movie_id': 1
+        })
 
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
-
 
     def test_post_actors(self):
 
@@ -116,19 +117,18 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertEqual(data['created'], 1)
 
-# Movies 
+# Movies
 
     def test_failed_post_movies(self):
 
         res = self.client().post('/movies', json={
-                                        'title': 'Titanic',
-                                        'release_date': '1997-11-18',
-                                    })
+            'title': 'Titanic',
+            'release_date': '1997-11-18',
+        })
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
-
 
     def test_post_movies(self):
 
@@ -143,10 +143,9 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertEqual(data['created'], 1)
 
-
 # Patch Test
 
-# Actors 
+# Actors
 
     def test_failed_patch_actors(self):
         res = self.client().patch('/actors/1', json={
@@ -167,8 +166,7 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertTrue(data['success'])
         self.assertIsNotNone(data['actors'])
 
-
-# Movie 
+# Movie
 
     def test_failed_patch_movies(self):
         res = self.client().patch('/movies/1', json={
@@ -190,7 +188,7 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertTrue(data['success'])
         self.assertIsNotNone(data['movies'])
 
-# Delete Test 
+# Delete Test
 
 # Actors
 
@@ -200,7 +198,6 @@ class CapstoneTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
-
 
     def test_delete_actors(self):
         res = self.client().delete('/actors/1', headers=Director_jwt)
@@ -219,7 +216,6 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
-
     def test_delete_movies(self):
 
         res = self.client().delete('/movies/1', headers=Executive_jwt)
@@ -229,7 +225,7 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertTrue(data['success'])
         self.assertIn('delete', data)
 
-        
+
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()

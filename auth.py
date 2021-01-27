@@ -9,21 +9,22 @@ AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
 ALGORITHMS = os.environ.get['ALGORITHMS']
 API_AUDIENCE = os.environ.get('API_AUDIENCE')
 
-## AuthError Exception
+# AuthError Exception
 '''
 AuthError Exception
 A standardized way to communicate auth failure modes
 '''
+
+
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
 
-
-## Auth Header
-
+# Auth Header
 
 # It is an attempt to get the header from the request.
+
 
 def get_token_auth_header():
 
@@ -33,7 +34,7 @@ def get_token_auth_header():
             'code': 'authorization_header_missing',
             'description': 'Authorization header is expected.'
         }, 401)
-        
+
     header_parts = auth.split(' ')
 
     if header_parts[0].lower() != 'bearer':
@@ -57,7 +58,9 @@ def get_token_auth_header():
     token = header_parts[1]
     return token
 
-# It is raise an AuthError if the requested permission string is not in the payload permissions array.
+# It is raise an AuthError if the requested permission string is not in
+# the payload permissions array.
+
 
 def check_permissions(permission, payload):
 
@@ -75,10 +78,15 @@ def check_permissions(permission, payload):
 
     return True
 
-# It is an Auth0 token with key id, verify the token, decode the payload and validate the claims.
+# It is an Auth0 token with key id, verify the token, decode the payload
+# and validate the claims.
+
 
 def verify_decode_jwt(token):
-# !! urlopen has a common certificate error described here: Scraping: SSL: CERTIFICATE_VERIFY_FAILED error for http://en.wikipedia.org
+
+    # !! urlopen has a common certificate error described here: Scraping: SSL:
+    # CERTIFICATE_VERIFY_FAILED error for http://en.wikipedia.org
+
     jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
     jwks = json.loads(jsonurl.read())
     unverified_header = jwt.get_unverified_header(token)
@@ -120,7 +128,7 @@ def verify_decode_jwt(token):
         except jwt.JWTClaimsError:
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'Incorrect claims. Please, check the audience and issuer.'
+                'description': 'Incorrect claims. Please, check the audience'
             }, 401)
         except Exception:
             raise AuthError({
@@ -128,11 +136,12 @@ def verify_decode_jwt(token):
                 'description': 'Unable to parse authentication token.'
             }, 400)
     raise AuthError({
-                'code': 'invalid_header',
+        'code': 'invalid_header',
                 'description': 'Unable to find the appropriate key.'
-            }, 400)
+    }, 400)
 
 # It is use get_token_auth_header, verify_decode_jwt, and check_permissions.
+
 
 def requires_auth(permission=''):
     def requires_auth_decorator(f):

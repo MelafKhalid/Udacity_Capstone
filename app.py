@@ -85,13 +85,17 @@ def create_app(test_config=None):
             age = body.get('age')
             gender = body.get('gender')
 
-            movie_id = body.get('movie_id') if 'movie_id' in body else movie_id = None
+            if 'movie_id' in body:
+                movie_id = body.get('movie_id')
+            else:
+                movie_id = None
 
             actor = Actors(
                 name=name,
                 age=age,
                 gender=gender,
                 movie_id=movie_id)
+
             actor.insert()
 
             return jsonify({
@@ -229,7 +233,7 @@ def create_app(test_config=None):
         except BaseException:
             abort(422)
 
- # Error Handling.
+# Error Handling.
 
     @app.errorhandler(400)
     def bad_request(error):

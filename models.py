@@ -4,7 +4,7 @@ import json
 import os
 
 database_name = "capstone"
-database_path = "postgres://rblqeobyvtmczu:a8aef0e9baed24a57c86a791634002da314ab03c8c27b230316bf77784d0ab40@ec2-54-84-238-74.compute-1.amazonaws.com:5432/d9e82e5fub564r"
+database_path = os.environ['DATABASE_URL']
 
 db = SQLAlchemy()
 
@@ -12,6 +12,7 @@ db = SQLAlchemy()
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
+
 
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
@@ -22,12 +23,17 @@ def setup_db(app, database_path=database_path):
 
 # Models
 
+
 class Movies(db.Model):
     __tablename__ = 'Movies'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     release_date = db.Column(db.Date)
-    actors = db.relationship('Actors', backref='movies', lazy=True, cascade='all, delete')
+    actors = db.relationship(
+        'Actors',
+        backref='movies',
+        lazy=True,
+        cascade='all, delete')
 
     def __init__(self, title, release_date):
         self.title = title
@@ -37,7 +43,7 @@ class Movies(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'release_date': self.release_date  
+            'release_date': self.release_date
         }
 
     def insert(self):
@@ -65,7 +71,7 @@ class Actors(db.Model):
         self.age = age
         self.gender = gender
         self.movie_id = movie_id
-        
+
     def format(self):
         return {
             'id': self.id,
