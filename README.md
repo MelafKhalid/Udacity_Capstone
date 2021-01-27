@@ -75,7 +75,7 @@ The API will return three types of errors:
 
 - Authentication: Auth0
 
-- Get a new token: <html> <a href=https://fsnd-melaf.us.auth0.com/login?state=g6Fo2SBDaGtwNFNfYktfZVRuaDI0M21rWW1GMDdweFBjaXRkaKN0aWTZIHNRUWVhaTBNV2U0OHFucGEtLXR4cmdkTzAwckZnemlvo2NpZNkgeTFLekxub2tBTDdvZFlHM0pzRlE2VWVGclI1QThSc1Q&client=y1KzLnokAL7odYG3JsFQ6UeFrR5A8RsT&protocol=oauth2&audience=Capstone&response_type=token&redirect_uri=https%3A%2F%2Flocalhost%3A8080%2Flogin-results> Click Here </a></html>
+- Get a new token: <html> <a href="https://fsnd-melaf.us.auth0.com/login?state=g6Fo2SBDaGtwNFNfYktfZVRuaDI0M21rWW1GMDdweFBjaXRkaKN0aWTZIHNRUWVhaTBNV2U0OHFucGEtLXR4cmdkTzAwckZnemlvo2NpZNkgeTFLekxub2tBTDdvZFlHM0pzRlE2VWVGclI1QThSc1Q&client=y1KzLnokAL7odYG3JsFQ6UeFrR5A8RsT&protocol=oauth2&audience=Capstone&response_type=token&redirect_uri=https%3A%2F%2Flocalhost%3A8080%2Flogin-results"> Click Here </a></html>
 
 ### Roles:
 
